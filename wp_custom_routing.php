@@ -19,6 +19,9 @@ add_filter('single_template', 'jobapplication_single_page');
 
 /**
  * Add "Custom" template to page attirbute template section.
+ 
+ theme_page_templates hook is available for page post type. If you want to add custom template to other
+ post type you must replace page with your custom post type name e.g. event post type hook will have a name theme_event_templates.
  */
 function wpse_288589_add_template_to_select( $post_templates, $wp_theme, $post, $post_type ) {
 
@@ -71,7 +74,9 @@ add_filter( 'template_include', 'wpse_288589_load_plugin_template' );
 /**
 * this system for cpt page and single cpt page within plugin directory
 *
-* I just used wordpress conditionals to check what what template was being requested  and then created a "theme_files" folder in my plugin directory and placed the appropriately named wordpress template files in there. This was to create a single and archive template for a custom post type.
+* I just used wordpress conditionals to check what what template was being requested  and then created a 
+"theme_files" folder in my plugin directory and placed the appropriately named wordpress template files in there.
+This was to create a single and archive template for a custom post type.
 */
 function include_template_files() {
 
@@ -131,7 +136,10 @@ function portfolio_page_template( $template ) {
 /**
 * Creating the routing rules
 *
-* We can use add_rewrite_rule function to register new custom routes with WordPress. This function can be implemented within many actions in WordPress. However, we usually use init action to handle the rewrite rules. Let's add a custom rewrite rule to handle the scenario of user login and registration:
+* We can use add_rewrite_rule function to register new custom routes with WordPress. 
+This function can be implemented within many actions in WordPress. However, 
+we usually use init action to handle the rewrite rules. Let's
+add a custom rewrite rule to handle the scenario of user login and registration:
 */
 
   add_action( 'init','wqraf_manage_user_routes' );
