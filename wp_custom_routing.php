@@ -1,5 +1,73 @@
 <?php
 
+
+// start code for cpt page and single cpt page from plugin directory
+
+
+function jobapplication_single_page( $file ) {
+    global $post;
+
+    if("jobapplication" == $post->post_type){
+        $file_path = plugin_dir_path(__FILE__)."cpt-templates/single-jobapplication.php";
+        $file = $file_path;
+    }
+    return $file;
+}
+
+add_filter('single_template', 'jobapplication_single_page');
+
+
+/**
+ * Add "Custom" template to page attirbute template section.
+ */
+function wpse_288589_add_template_to_select( $post_templates, $wp_theme, $post, $post_type ) {
+
+    // Add custom template named template-custom.php to select dropdown 
+    $post_templates['jobapplication-cpt-page.php'] = __('rezwan plugin cpt page');
+
+    return $post_templates;
+}
+
+add_filter( 'theme_page_templates', 'wpse_288589_add_template_to_select', 10, 4 );
+
+
+/**
+ * Check if current page has our custom template. Try to load
+ * template from theme directory and if not exist.... load it 
+ * from root plugin directory.
+ */
+function wpse_288589_load_plugin_template( $template ) {
+
+    if(  get_page_template_slug() === 'jobapplication-cpt-page.php' ) {
+
+        if ( $theme_file = locate_template( array( 'jobapplication-cpt-page.php' ) ) ) {
+            $template = $theme_file;
+        } else {
+            $template = plugin_dir_path( __FILE__ ) . 'jobapplication-cpt-page.php';
+        }
+    }
+
+    if($template == '') {
+        throw new \Exception('No template found');
+    }
+
+    return $template;
+}
+
+add_filter( 'template_include', 'wpse_288589_load_plugin_template' );
+
+// end code for cpt page and single cpt page from plugin directory
+
+
+
+
+
+
+
+
+
+
+
 /**
 * this system for cpt page and single cpt page within plugin directory
 *
