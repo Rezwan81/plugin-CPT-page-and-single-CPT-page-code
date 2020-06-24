@@ -65,6 +65,22 @@ add_filter( 'template_include', 'wpse_288589_load_plugin_template' );
 
 
 
+// adds the submenu to that Custom Post Type:
+add_action('admin_menu', 'email_api');
+
+function email_api()
+{
+    add_submenu_page( 'edit.php?post_type=jobapplication', 'Segment Creator', 'Segment Creator', 'manage_options', 'segment-creator', 'email_api_main');
+}
+
+function email_api_main() 
+{ 
+    echo '<h1>HERE WE ADD THE REST OF THE CODE...</h1>'; 
+}
+
+
+
+
 
 
 
