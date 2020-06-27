@@ -1,6 +1,33 @@
 <?php
 
 
+
+// single page data show 
+<h1> plugin single php page</h1><br><br>
+
+<button onclick="window.print()">Print this page</button><br>
+<hr><hr>
+
+
+<?php 
+
+$image_id = get_post_meta(get_the_id(), 'candidate_image', true);
+$image_data =  wp_get_attachment_image_src($image_id, 'full');?> 
+
+
+Image: <img style="border-radius:50%; width:250px; position:center;" src="<?php echo $image_data[0];?>"/> <br>
+
+<?php the_title();?> <br>
+
+<?php echo get_post_meta(get_the_id(), 'email', true);?> <br>
+
+<?php echo get_post_meta(get_the_id(), 'phone', true);?> 
+
+<hr><hr>
+
+
+
+
 // start code for cpt page and single cpt page from plugin directory
 
 
